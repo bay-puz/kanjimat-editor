@@ -7,27 +7,38 @@ table {
     border: solid;
 }
 
+thead {
+    border-bottom: solid;
+}
+
+th {
+    border-right: solid;
+}
+
 thead, tbody {
     text-align: center;
 }
 
 input {
     font-size: xx-large;
-    text-align: center;
     border: none;
 }
 
 .problemChar {
+    text-align: left;
     color: black;
     width: 5em;
 }
 
 .problemNumber {
+    text-align: center;
     color: black;
     width: 1em;
+    -moz-appearance: textfield;
 }
 
 .answerChar {
+    text-align: center;
     color: green;
-    width: 1em;
+    width: 1.5em;
 }
