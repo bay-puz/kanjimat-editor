@@ -19,25 +19,26 @@ thead, tbody {
     text-align: center;
 }
 
-input {
+.problemChar {
     font-size: xx-large;
     border: none;
-}
-
-.problemChar {
     text-align: left;
     color: black;
     width: 5em;
 }
 
 .problemNumber {
+    font-size: xx-large;
     text-align: center;
     color: black;
-    width: 1em;
-    -moz-appearance: textfield;
+    width: 1.5em;
+    cursor: default;
+    user-select: none;
 }
 
 .answerChar {
+    font-size: xx-large;
+    border: none;
     text-align: center;
     color: green;
     width: 1.5em;

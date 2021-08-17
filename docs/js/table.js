@@ -4,7 +4,7 @@ function getTableHeaderHtml(length) {
     var thElement = document.createElement("th");
     thElement.innerText = "";
     trElement.append(thElement);
-    for (let index = 0; index < 3; index++) {
+    for (let index = 0; index < row; index++) {
         var tdElement = document.createElement("td");
         tdElement.append(getInputCharHtml(true));
         trElement.append(tdElement);
@@ -18,7 +18,7 @@ function getInputRowHtml(num, length) {
     var thElement = document.createElement("th");
     thElement.append(getInputCharHtml(false), getInputCharHtml(true));
     trElement.append(thElement);
-    for (let index = 0; index < 3; index++) {
+    for (let index = 0; index < row; index++) {
         var tdElement = document.createElement("td");
         tdElement.append(getInputNumberHtml());
         trElement.append(tdElement);
@@ -37,9 +37,49 @@ function getInputCharHtml(answer) {
 }
 
 function getInputNumberHtml() {
-    var inputElement = document.createElement("input");
+    var inputElement = document.createElement("span");
     inputElement.classList.add("problemNumber");
-    inputElement.type = "number";
-    inputElement.min = "0";
     return inputElement;
+}
+
+function clickTable(event) {
+    var element = document.elementFromPoint(event.pageX, event.pageY);
+    if (element.classList.contains("problemNumber")) {
+        upProblemNumber(element);
+        return;
+    }
+    var cellElements = element.getElementsByClassName("problemNumber");
+    for (const cellElement of cellElements) {
+        upProblemNumber(cellElement);
+        return;
+    }
+}
+
+function upProblemNumber(element) {
+    var number = parseInt(element.innerText);
+    if (number) {
+        element.innerText = number + 1;
+    } else {
+        element.innerText = 1;
+    }
+}
+
+function rightClickTable(event) {
+    var element = document.elementFromPoint(event.pageX, event.pageY);
+    if (element.classList.contains("problemNumber")) {
+        downProblemNumber(element);
+        return;
+    }
+    var cellElements = element.getElementsByClassName("problemNumber");
+    for (const cellElement of cellElements) {
+        downProblemNumber(cellElement);
+        return;
+    }
+}
+
+function downProblemNumber(element) {
+    var number = parseInt(element.innerText);
+    if (number) {
+        element.innerText = number > 1 ? number - 1: "";
+    }
 }

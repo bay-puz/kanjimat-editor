@@ -11,3 +11,7 @@ function setProblem() {
     tableElement.append(theadElement, tbodyElement);
 };
 setProblem();
+
+document.getElementById("table").addEventListener("click", clickTable);
+document.getElementById("table").oncontextmenu = function() {rightClickTable(event); return false};
+
