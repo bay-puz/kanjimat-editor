@@ -2,6 +2,10 @@ body {
     text-align: center;
 }
 
+#inputChar {
+    width: 5em;
+}
+
 table {
     margin: auto;
     border: solid;
@@ -11,35 +15,42 @@ thead {
     border-bottom: solid;
 }
 
-th {
-    border-right: solid;
-}
-
-thead, tbody {
+td {
+    width: 2em;
     text-align: center;
 }
 
-.problemChar {
-    font-size: xx-large;
-    border: none;
+th, td {
+    height: 2em;
+    cursor: default;
+    user-select: none;
+    font-size: auto;
+    font-weight: normal;
+}
+
+.leftProblem {
     text-align: left;
-    color: black;
+    padding-left: 5%;
+    border-right: none;
     width: 5em;
 }
 
-.problemNumber {
-    font-size: xx-large;
-    text-align: center;
+.leftAnswer {
+    text-align: right;
+    padding-right: 5%;
+    border-right: solid;
+    border-left: none;
+    width: 2em;
+}
+
+.problemChar {
     color: black;
-    width: 1.5em;
-    cursor: default;
-    user-select: none;
+}
+
+.problemNumber {
+    color: black;
 }
 
 .answerChar {
-    font-size: xx-large;
-    border: none;
-    text-align: center;
     color: green;
-    width: 1.5em;
 }

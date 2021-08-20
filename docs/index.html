@@ -10,10 +10,18 @@
             <h1>漢字部品マット</h1>
             <h2>編集モード</h2>
         </head>
-        <div id="board">
+        <p>
+            <label for="inputChar">文字</label>
+            <input type="text" id="inputChar">
+            <label for="problemInput">問題</label>
+            <input type="radio" id="problemInput" name="inputMode" value="problem" checked>
+            <label for="answerInput">解答</label>
+            <input type="radio" id="answerInput" name="inputMode" value="answer">
+        </p>
+        <p id="board">
             <table rules="all" id="table">
             </table>
-        </div>
+        </p>
         <script type="text/javascript" src="./js/table.js"></script>
         <script type="text/javascript" src="./js/main.js"></script>
     </body>
