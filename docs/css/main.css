@@ -6,6 +6,20 @@ body {
     width: 5em;
 }
 
+.inputSize {
+    width: 1em;
+    text-align: right;
+    -moz-appearance: textfield;
+}
+
+button {
+    padding: 4px;
+    border-radius: 0.5em;
+    background-color: lightblue;
+    border: none;
+    cursor: pointer;
+}
+
 table {
     margin: auto;
     border: solid;

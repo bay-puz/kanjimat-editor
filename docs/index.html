@@ -10,14 +10,23 @@
             <h1>漢字部品マット</h1>
             <h2>編集モード</h2>
         </head>
-        <p>
-            <label for="inputChar">文字</label>
-            <input type="text" id="inputChar">
-            <label for="problemInput">問題</label>
-            <input type="radio" id="problemInput" name="inputMode" value="problem" checked>
-            <label for="answerInput">解答</label>
-            <input type="radio" id="answerInput" name="inputMode" value="answer">
-        </p>
+        <div>
+            <p>
+                <label for="setRow">ヨコ</label>
+                <input type="number" id="setRow" min="1" class="inputSize" value="8">
+                <label for="setColumn">タテ</label>
+                <input type="number" id="setColumn" min="1" class="inputSize" value="9">
+                <button id="setSize">サイズ変更</button>
+            </p>
+            <p>
+                <label for="inputChar">文字</label>
+                <input type="text" id="inputChar">
+                <label for="problemInput">問題</label>
+                <input type="radio" id="problemInput" name="inputMode" value="problem" checked>
+                <label for="answerInput">解答</label>
+                <input type="radio" id="answerInput" name="inputMode" value="answer">
+            </p>
+        </div>
         <p id="board">
             <table rules="all" id="table">
             </table>
