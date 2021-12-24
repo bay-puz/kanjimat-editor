@@ -1,4 +1,4 @@
-function getTableHeaderHtml() {
+function getTableHeaderHtml(row) {
     var theadElement = document.createElement("thead");
     var trElement = document.createElement("tr");
     trElement.id = "row0";
@@ -18,7 +18,7 @@ function getTableHeaderHtml() {
     return theadElement;
 }
 
-function getRowHtml(num) {
+function getRowHtml(num, row) {
     var trElement = document.createElement("tr");
     trElement.id = "row" + num;
 

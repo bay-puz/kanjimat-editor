@@ -1,4 +1,3 @@
-
 function setEditMode() {
     var elements = document.getElementsByClassName("displayAnswerMode");
     for (const element of elements) {
@@ -22,3 +21,23 @@ function setMode() {
     }
 }
 setMode();
+
+function encodeHint() {
+    var hint = ""
+    return hint
+}
+
+function decodeHint(hintString) {
+    console.log("puts hint in table", hintString);
+    return
+}
+
+function decodeHint() {
+    var answer = ""
+    return answer
+}
+
+function decodeAnswer(answerString) {
+    console.log("puts answer in table", answerString);
+    return
+}
