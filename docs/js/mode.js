@@ -23,7 +23,7 @@ function setMode() {
 setMode();
 
 function encodeHint() {
-    var hint = ""
+    var hint = "hint1"
     return hint
 }
 
@@ -32,8 +32,8 @@ function decodeHint(hintString) {
     return
 }
 
-function decodeHint() {
-    var answer = ""
+function encodeAnswer() {
+    var answer = "answer1"
     return answer
 }
 
