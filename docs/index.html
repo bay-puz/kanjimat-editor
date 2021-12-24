@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>漢字部品マット</title>
+        <link href="./css/main.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <head>
+            <h1>漢字部品マット</h1>
+            <dev class="displayEditMode"><h2>編集モード</h2></dev>
+            <dev class="displaySolveMode"><h2>解答モード</h2></dev>
+        </head>
+        <div>
+            <p id="settingSize" class="displayEditMode">
+                <label for="setRow">ヨコ</label>
+                <input type="number" id="setRow" min="1" class="inputSize" value="8">
+                <label for="setColumn">タテ</label>
+                <input type="number" id="setColumn" min="1" class="inputSize" value="9">
+                <button id="setSize">サイズ変更</button>
+            </p>
+            <p id="settingUrl">
+                URL出力 
+                <button id="showEditUrl">編集</button>
+                <button id="showSolveUrl">解答</button>
+                <button id="showSolveCheckUrl" class="hidden">解答（正解判定付き）</button>
+            </p>
+            <p id="settingCharacter">
+                <label for="inputChar">文字</label>
+                <input type="text" id="inputChar">
+                <dev id="settingInput" class="displayEditMode">
+                    （
+                    <label for="problemInput">問題</label>
+                    <input type="radio" id="problemInput" name="inputMode" value="problem">
+                    ／
+                    <label for="answerInput">解答</label>
+                    <input type="radio" id="answerInput" name="inputMode" value="answer" checked>
+                    ）
+                </dev>
+            </p>
+        </div>
+        <p id="board">
+            <table rules="all" id="table">
+            </table>
+        </p>
+        <script type="text/javascript" src="./js/table.js"></script>
+        <script type="text/javascript" src="./js/mode.js"></script>
+        <script type="text/javascript" src="./js/main.js"></script>
+    </body>
+</html>
