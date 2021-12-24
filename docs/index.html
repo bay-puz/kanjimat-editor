@@ -8,23 +8,29 @@
     <body>
         <head>
             <h1>漢字部品マット</h1>
-            <h2>編集モード</h2>
+            <dev class="displayEditMode"><h2>編集モード</h2></dev>
+            <dev class="displayAnswerMode"><h2>解答モード</h2></dev>
         </head>
         <div>
-            <p>
+            <p id="settingSize" class="displayEditMode">
                 <label for="setRow">ヨコ</label>
                 <input type="number" id="setRow" min="1" class="inputSize" value="8">
                 <label for="setColumn">タテ</label>
                 <input type="number" id="setColumn" min="1" class="inputSize" value="9">
                 <button id="setSize">サイズ変更</button>
             </p>
-            <p>
+            <p id="settingCharacter">
                 <label for="inputChar">文字</label>
                 <input type="text" id="inputChar">
-                <label for="problemInput">問題</label>
-                <input type="radio" id="problemInput" name="inputMode" value="problem" checked>
-                <label for="answerInput">解答</label>
-                <input type="radio" id="answerInput" name="inputMode" value="answer">
+                <dev id="settingInput" class="displayEditMode">
+                    （
+                    <label for="problemInput">問題</label>
+                    <input type="radio" id="problemInput" name="inputMode" value="problem">
+                    ／
+                    <label for="answerInput">解答</label>
+                    <input type="radio" id="answerInput" name="inputMode" value="answer" checked>
+                    ）
+                </dev>
             </p>
         </div>
         <p id="board">
@@ -32,6 +38,7 @@
             </table>
         </p>
         <script type="text/javascript" src="./js/table.js"></script>
+        <script type="text/javascript" src="./js/mode.js"></script>
         <script type="text/javascript" src="./js/main.js"></script>
     </body>
 </html>

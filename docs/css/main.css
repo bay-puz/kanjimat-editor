@@ -3,7 +3,7 @@ body {
 }
 
 #inputChar {
-    width: 5em;
+    width: 3em;
 }
 
 .inputSize {
@@ -67,4 +67,8 @@ th, td {
 
 .answerChar {
     color: green;
+}
+
+.hidden {
+    display: none;
 }
