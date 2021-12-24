@@ -2,10 +2,13 @@ document.getElementById("table").addEventListener("click", clickTable);
 document.getElementById("table").oncontextmenu = function() {rightClickTable(event); return false};
 document.getElementById("setSize").addEventListener("click", setSize);
 document.getElementById("showEditUrl").addEventListener("click", function(){showUrl("edit")} );
-document.getElementById("showAnswerUrl").addEventListener("click", function(){showUrl("answer")} );
-document.getElementById("showAnswerCheckUrl").addEventListener("click", function(){showUrl("answerCheck")} );
+document.getElementById("showSolveUrl").addEventListener("click", function(){showUrl("solve")} );
+document.getElementById("showSolveCheckUrl").addEventListener("click", function(){showUrl("solveCheck")} );
 
 function setProblem(row, column) {
+    document.getElementById("setRow").value = row;
+    document.getElementById("setColumn").value = column;
+
     var tableElement = document.getElementById("table");
     if (tableElement.innerText.length > 0) {
         tableElement.innerText = "";
@@ -24,7 +27,7 @@ function setSize() {
 
 function showProblem() {
     var params = new URLSearchParams(document.location.search);
-    if (!params.has("r") || !params.get("c")) {
+    if (!params.has("r") || !params.has("c")) {
         setSize();
         return
     }
@@ -45,12 +48,12 @@ function showUrl(mode) {
     if (mode === "edit") {
         params.append("m", mode);
     } else {
-        params.append("m", "answer")
+        params.append("m", "solve")
     }
     params.append("r", getTableRow());
     params.append("c", getTableColumn());
     params.append("p", encodeHint());
-    if (mode != "answer") {
+    if (mode != "solve") {
         params.append("a", encodeAnswer())
     }
     const url = new URL(location.href)
