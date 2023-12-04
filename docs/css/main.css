@@ -9,7 +9,7 @@ body {
 .inputSize {
     width: 1em;
     text-align: right;
-    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 button {
@@ -46,7 +46,7 @@ th, td {
     text-align: left;
     padding-left: 5%;
     border-right: none;
-    width: 5em;
+    width: 6em;
 }
 
 .leftAnswer {

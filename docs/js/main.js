@@ -58,7 +58,14 @@ function showUrl(mode) {
     }
     const url = new URL(location.href)
     url.search = params;
-    alert(url)
+
+    var urlElement = document.getElementById("showURL")
+    urlElement.href = url
+    urlElement.innerText = url.toString()
+    var detailElement = document.getElementById("URLErea")
+    detailElement.open = true
+    var lineElement = document.getElementById("URLLine")
+    lineElement.classList.remove("hidden")
 }
 
 function getTableRow() {

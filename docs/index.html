@@ -20,10 +20,15 @@
                 <button id="setSize">サイズ変更</button>
             </p>
             <p id="settingUrl">
-                URL出力 
-                <button id="showEditUrl">編集</button>
-                <button id="showSolveUrl">解答</button>
-                <button id="showSolveCheckUrl" class="hidden">解答（正解判定付き）</button>
+                <details id="URLErea" class="noTriangle">
+                    <summary>
+                        URL出力
+                        <button id="showEditUrl">編集</button>
+                        <button id="showSolveUrl">解答</button>
+                        <button id="showSolveCheckUrl" class="hidden">解答（正解判定付き）</button>
+                    </summary>
+                    <p id="URLLine" class="hidden"><a href id="showURL" target="_blank"></a></p>
+                </details>
             </p>
             <p id="settingCharacter">
                 <label for="inputChar">文字</label>
