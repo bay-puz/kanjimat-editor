@@ -1,4 +1,4 @@
-function getTableHeaderHtml(row) {
+function createTableHeaderHtml(row) {
     var theadElement = document.createElement("thead");
     var trElement = document.createElement("tr");
     trElement.id = "row0";
@@ -11,48 +11,54 @@ function getTableHeaderHtml(row) {
     for (let index = 0; index < row; index++) {
         var tdElement = document.createElement("td");
         tdElement.classList.add("charUp");
-        tdElement.append(getAnswerCharHtml());
+        tdElement.append(createAnswerPartHtml());
         trElement.append(tdElement);
     }
     theadElement.append(trElement);
     return theadElement;
 }
 
-function getRowHtml(num, row) {
+function createRowHtml(num, row) {
     var trElement = document.createElement("tr");
     trElement.id = "row" + num;
 
     var thElement = document.createElement("th");
     thElement.classList.add("leftProblem");
-    thElement.append(getProblemCharHtml());
+    thElement.append(createProblemCharHtml());
     trElement.append(thElement);
 
     thElement = document.createElement("th");
     thElement.classList.add("leftAnswer");
-    thElement.append(getAnswerCharHtml());
+    thElement.append(createAnswerCharHtml());
     trElement.append(thElement);
 
     for (let index = 0; index < row; index++) {
         var tdElement = document.createElement("td");
-        tdElement.append(getProblemNumberHtml());
+        tdElement.append(createProblemNumberHtml());
         trElement.append(tdElement);
     }
     return trElement;
 }
 
-function getAnswerCharHtml() {
+function createAnswerCharHtml() {
     var element = document.createElement("span");
     element.classList.add("answerChar", "char");
     return element;
 }
 
-function getProblemCharHtml() {
+function createAnswerPartHtml() {
+    var element = document.createElement("span");
+    element.classList.add("answerPart", "char");
+    return element;
+}
+
+function createProblemCharHtml() {
     var element = document.createElement("span");
     element.classList.add("problemChar", "char");
     return element;
 }
 
-function getProblemNumberHtml() {
+function createProblemNumberHtml() {
     var element = document.createElement("span");
     element.classList.add("problemNumber");
     return element;
@@ -117,9 +123,14 @@ function downProblemNumber(element) {
 
 function writeChar(element) {
     const char = document.getElementById("inputChar").value;
-    className = isProblemMode() ? "problemChar": "answerChar";
-    if (! element.classList.contains(className)) {
-        return;
+    if (isProblemMode()) {
+        if (! element.classList.contains("problemChar")) {
+            return;
+        }
+    } else {
+        if (! element.classList.contains("answerChar") && ! element.classList.contains("answerPart")) {
+            return;
+        }
     }
     if (element.innerText === char) {
         element.innerText = "";
