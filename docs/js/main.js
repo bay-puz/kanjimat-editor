@@ -4,8 +4,9 @@ document.getElementById("setSize").addEventListener("click", changeSise);
 document.getElementById("showEditUrl").addEventListener("click", function(){showUrl("edit")} );
 document.getElementById("showSolveUrl").addEventListener("click", function(){showUrl("solve")} );
 document.getElementById("showSolveCheckUrl").addEventListener("click", function(){showUrl("solveCheck")} );
+document.getElementById("exchangeButton").addEventListener("click", exchangeLines );
 
-function setProblem(row, column) {
+function makeNewBoard(row, column) {
     document.getElementById("setRow").value = row;
     document.getElementById("setColumn").value = column;
 
@@ -29,7 +30,7 @@ function changeSise() {
     const answerPart = getAnswerPart()
     const oldRow = answerPart.length
     const hintNum = getHintNum(oldRow)
-    setProblem(newRow, newColumn);
+    makeNewBoard(newRow, newColumn);
     setHint(hintChar, hintNum, newRow)
     setAnswer(answerChar, answerPart)
 }
@@ -37,12 +38,12 @@ function changeSise() {
 function showProblem() {
     var params = new URLSearchParams(document.location.search);
     if (!params.has("r") || !params.has("c")) {
-        setProblem(8, 9);
+        makeNewBoard(8, 9);
         return
     }
     const rowInput = parseInt(params.get("r"))
     const columnInput = parseInt(params.get("c"))
-    setProblem(rowInput, columnInput);
+    makeNewBoard(rowInput, columnInput);
     const hintChar = params.has("h") ? stringToArray(params.get("h")) : []
     const hintNum = params.has("i") ? stringToArray(params.get("i")) : []
     const anserChar = params.has("j") ? stringToArray(params.get("j")) : []
@@ -144,4 +145,22 @@ function writeChar(element) {
 
 function isProblemMode() {
     return document.getElementById("problemInput").checked;
+}
+
+function exchangeLines() {
+    const exchange1 = Number(document.getElementById("exchange1").value)
+    const exchange2 = Number(document.getElementById("exchange2").value)
+    if(exchange1 <= 0 || exchange2 <= 0 || exchange1 === exchange2) {
+        return
+    }
+
+    if(isExchangeRow()) {
+        exchangeRow(exchange1, exchange2)
+    } else {
+        exchangeColumn(exchange1, exchange2)
+    }
+}
+
+function isExchangeRow() {
+    return document.getElementById("exchangeRow").checked;
 }

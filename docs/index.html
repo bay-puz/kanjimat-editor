@@ -20,7 +20,7 @@
                 <button id="setSize">サイズ変更</button>
             </p>
             <p id="settingUrl">
-                <details id="URLErea" class="noTriangle">
+                <details id="URLErea">
                     <summary>
                         URL出力
                         <button id="showEditUrl">編集</button>
@@ -30,14 +30,33 @@
                     <p id="URLLine" class="hidden"><a href id="showURL" target="_blank"></a></p>
                 </details>
             </p>
+            <p id="settingLine">
+                <details id="exchangeLine">
+                    <summary>
+                        行・列を入れ替える
+                    </summary>
+                    <p>
+                        <label for="exchangeRow">行</label>
+                        <input type="radio" id="exchangeRow" name="exchangeMode" value="row" checked>
+                        ／
+                        <label for="exchangeColumn">列</label>
+                        <input type="radio" id="exchangeColumn" name="exchangeMode" value="column">
+                    </p>
+                    <p>
+                        <input type="number" id="exchange1" min="1" class="inputSize" value="1">
+                        <input type="number" id="exchange2" min="1" class="inputSize" value="1">
+                        <button id="exchangeButton">入れ替える</button>
+                    </p>
+                </details>
+            </p>
             <p id="settingCharacter">
-                <dev id="settingInput" class="displayEditMode">
+                <div id="settingInput" class="displayEditMode">
                     <label for="problemInput">問題</label>
-                    <input type="radio" id="problemInput" name="inputMode" value="problem">
+                    <input type="radio" id="problemInput" name="inputMode" value="problem" checked>
                     ／
                     <label for="answerInput">解答</label>
-                    <input type="radio" id="answerInput" name="inputMode" value="answer" checked>
-                </dev>
+                    <input type="radio" id="answerInput" name="inputMode" value="answer">
+                </div>
             </p>
         </div>
         <p id="board">
@@ -47,6 +66,7 @@
         <script type="text/javascript" src="./js/table.js"></script>
         <script type="text/javascript" src="./js/mode.js"></script>
         <script type="text/javascript" src="./js/data.js"></script>
+        <script type="text/javascript" src="./js/exchange.js"></script>
         <script type="text/javascript" src="./js/main.js"></script>
     </body>
 </html>
