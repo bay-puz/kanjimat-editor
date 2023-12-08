@@ -64,28 +64,6 @@ function createProblemNumberHtml() {
     return element;
 }
 
-function clickTable(event) {
-    var element = document.elementFromPoint(event.pageX, event.pageY);
-    if (element.classList.contains("problemNumber")) {
-        upProblemNumber(element);
-        return;
-    }
-    if (element.classList.contains("char")) {
-        writeChar(element);
-        return;
-    }
-    var cellElements = element.getElementsByClassName("problemNumber");
-    if (cellElements.length > 0) {
-        upProblemNumber(cellElements[0]);
-        return;
-    }
-    var cellElements = element.getElementsByClassName("char");
-    if (cellElements.length > 0) {
-        writeChar(cellElements[0]);
-        return;
-    }
-}
-
 function upProblemNumber(element) {
     if (! isProblemMode()) {
         return;
@@ -119,26 +97,4 @@ function downProblemNumber(element) {
     if (number) {
         element.innerText = number > 1 ? number - 1: "";
     }
-}
-
-function writeChar(element) {
-    const char = document.getElementById("inputChar").value;
-    if (isProblemMode()) {
-        if (! element.classList.contains("problemChar")) {
-            return;
-        }
-    } else {
-        if (! element.classList.contains("answerChar") && ! element.classList.contains("answerPart")) {
-            return;
-        }
-    }
-    if (element.innerText === char) {
-        element.innerText = "";
-    } else {
-        element.innerText = char;
-    }
-}
-
-function isProblemMode() {
-    return document.getElementById("problemInput").checked;
 }

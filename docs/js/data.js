@@ -1,11 +1,12 @@
-BLANK = " "
+BLANK = ""
+DELIMETER = "-"
 
 function arrayToString(array) {
-    return array.join(".")
+    return array.join(DELIMETER)
 }
 
 function stringToArray(string) {
-    return string.split(".")
+    return string.split(DELIMETER)
 }
 
 function getWritten(className) {
@@ -13,7 +14,7 @@ function getWritten(className) {
     var elements = document.getElementsByClassName(className);
     for (const element of elements) {
         var written = element.innerHTML;
-        if (! written) {
+        if (! written || written.length === 0) {
             written = BLANK
         }
         array.push(written)
@@ -53,7 +54,7 @@ function getHintChar() {
 }
 
 function getHintNum(row = 0) {
-    array = getWritten("problemNumber")
+    var array = getWritten("problemNumber")
     if (row === 0) {
         return array
     }

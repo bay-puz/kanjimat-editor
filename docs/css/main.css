@@ -2,10 +2,6 @@ body {
     text-align: center;
 }
 
-#inputChar {
-    width: 3em;
-}
-
 .inputSize {
     width: 1em;
     text-align: right;
@@ -40,6 +36,10 @@ th, td {
     user-select: none;
     font-size: auto;
     font-weight: normal;
+}
+
+prompt {
+    width: 10em;
 }
 
 .leftProblem {

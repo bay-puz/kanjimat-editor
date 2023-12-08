@@ -1,4 +1,4 @@
-document.getElementById("table").addEventListener("click", clickTable);
+document.getElementById("table").addEventListener("click", clickBoard);
 document.getElementById("table").oncontextmenu = function() {rightClickTable(event); return false};
 document.getElementById("setSize").addEventListener("click", changeSise);
 document.getElementById("showEditUrl").addEventListener("click", function(){showUrl("edit")} );
@@ -85,4 +85,63 @@ function getTableRow() {
 
 function getTableColumn() {
     return parseInt(document.getElementById("setColumn").value);
+}
+
+function clickBoard(event) {
+    var element = document.elementFromPoint(event.pageX, event.pageY);
+    if (isProblemMode()) {
+        clickProblem(element)
+    } else {
+        clickAnswer(element)
+    }
+}
+
+function clickProblem(element) {
+    if (element.classList.contains("problemNumber")) {
+        upProblemNumber(element);
+        return;
+    }
+    if (element.classList.contains("problemChar")) {
+        writeChar(element);
+        return;
+    }
+    var cellElements = element.getElementsByClassName("problemNumber");
+    if (cellElements.length > 0) {
+        upProblemNumber(cellElements[0]);
+        return;
+    }
+    var cellElements = element.getElementsByClassName("problemChar");
+    if (cellElements.length > 0) {
+        writeChar(cellElements[0]);
+        return;
+    }
+}
+
+function clickAnswer(element) {
+    if (element.classList.contains("answerChar") || element.classList.contains("answerPart")) {
+        writeChar(element);
+        return;
+    }
+    var cellElements = element.getElementsByClassName("answerChar");
+    if (cellElements.length > 0) {
+        writeChar(cellElements[0]);
+        return;
+    }
+    var cellElements = element.getElementsByClassName("answerPart");
+    if (cellElements.length > 0) {
+        writeChar(cellElements[0]);
+        return;
+    }
+}
+
+function writeChar(element) {
+    var char = prompt()
+    if (char === null) {
+        return
+    }
+    element.innerText = char;
+}
+
+function isProblemMode() {
+    return document.getElementById("problemInput").checked;
 }
