@@ -20,13 +20,15 @@
                 <button id="setSize">サイズ変更</button>
             </p>
             <p id="settingUrl">
-                <details id="URLErea">
+                <details id="URLErea" open>
                     <summary>
                         URL出力
+                    </summary>
+                    <p>
                         <button id="showEditUrl">編集</button>
                         <button id="showSolveUrl">解答</button>
-                        <button id="showSolveCheckUrl" class="hidden">解答（正解判定付き）</button>
-                    </summary>
+                        <button id="showSolveCheckUrl">解答（正解判定付き）</button>
+                    </p>
                     <p id="URLLine" class="hidden"><a href id="showURL" target="_blank"></a></p>
                 </details>
             </p>
@@ -62,6 +64,9 @@
         <p id="board">
             <table rules="all" id="table">
             </table>
+        </p>
+        <p id="answerCheckErea" class="answerCheck hidden">
+            <button id="checkAnswer">チェック</button>
         </p>
         <script type="text/javascript" src="./js/table.js"></script>
         <script type="text/javascript" src="./js/mode.js"></script>

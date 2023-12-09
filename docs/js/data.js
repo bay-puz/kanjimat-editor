@@ -87,3 +87,23 @@ function setAnswer(answerChar, answerPart) {
     setWritten("answerChar", answerChar)
     setWritten("answerPart", answerPart)
 }
+function setAnswerCheck() {
+    var elements = document.getElementsByClassName("answerCheck")
+    for(const element of elements) {
+        element.classList.remove("hidden")
+    }
+}
+
+async function hashAnswer(answerChar, answerPart) {
+    const messageString = answerChar.join("") + answerPart.join("")
+    const message = new TextEncoder().encode(messageString)
+    const hashBuffer = await crypto.subtle.digest('SHA-1', message);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
+async function compareHash(hash) {
+    const nowHash = await hashAnswer(getAnswerChar(), getAnswerPart())
+    return hash === nowHash
+}

@@ -4,7 +4,8 @@ document.getElementById("setSize").addEventListener("click", changeSise);
 document.getElementById("showEditUrl").addEventListener("click", function(){showUrl("edit")} );
 document.getElementById("showSolveUrl").addEventListener("click", function(){showUrl("solve")} );
 document.getElementById("showSolveCheckUrl").addEventListener("click", function(){showUrl("solveCheck")} );
-document.getElementById("exchangeButton").addEventListener("click", exchangeLines );
+document.getElementById("exchangeButton").addEventListener("click", exchangeLines);
+document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 
 function makeNewBoard(row, column) {
     document.getElementById("setRow").value = row;
@@ -46,17 +47,20 @@ function showProblem() {
     makeNewBoard(rowInput, columnInput);
     const hintChar = params.has("h") ? stringToArray(params.get("h")) : []
     const hintNum = params.has("i") ? stringToArray(params.get("i")) : []
-    const anserChar = params.has("j") ? stringToArray(params.get("j")) : []
+    const answerChar = params.has("j") ? stringToArray(params.get("j")) : []
     const answerPart = params.has("k") ? stringToArray(params.get("k")) : []
     setHint(hintChar, hintNum)
-    setAnswer(anserChar, answerPart)
+    setAnswer(answerChar, answerPart)
+    if(params.has("a")) {
+        setAnswerCheck()
+    }
 }
 showProblem();
 
-function showUrl(mode) {
+async function showUrl(mode) {
     var params = new URLSearchParams();
-    if (mode === "solve") {
-        params.append("m", mode);
+    if (mode === "solve" | mode === "solveCheck") {
+        params.append("m", "solve");
     } else {
         params.append("m", "edit")
     }
@@ -64,9 +68,13 @@ function showUrl(mode) {
     params.append("c", getTableColumn());
     params.append("h", arrayToString(getHintChar()))
     params.append("i", arrayToString(getHintNum()))
-    if (mode !== "solve") {
+    if (mode === "edit") {
         params.append("j", arrayToString(getAnswerChar()))
         params.append("k", arrayToString(getAnswerPart()))
+    }
+    if (mode === "solveCheck") {
+        const answerHash = await hashAnswer(getAnswerChar(), getAnswerPart())
+        params.append("a", answerHash)
     }
     const url = new URL(location.href)
     url.search = params;
@@ -144,6 +152,10 @@ function writeChar(element) {
 }
 
 function isProblemMode() {
+    var params = new URLSearchParams(document.location.search);
+    if(params.get("m") === "solve") {
+        return false
+    }
     return document.getElementById("problemInput").checked;
 }
 
@@ -163,4 +175,18 @@ function exchangeLines() {
 
 function isExchangeRow() {
     return document.getElementById("exchangeRow").checked;
+}
+
+async function checkAnswer() {
+    var params = new URLSearchParams(document.location.search);
+    if (!params.has("a")) {
+        return
+    }
+    const problemHash = params.get("a")
+    const ansewrHash = await hashAnswer(getAnswerChar(), getAnswerPart())
+    if(problemHash === ansewrHash) {
+        alert("正解です！")
+    } else {
+        alert("不正解")
+    }
 }
