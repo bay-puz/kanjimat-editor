@@ -1,23 +1,23 @@
 function exchangeRow(row1, row2) {
-    var answerPart = swapArray(getAnswerPart(), row1, row2)
+    var hintChar = swapArray(getHintChar(), row1, row2)
+    var answerChar = swapArray(getAnswerChar(), row1, row2)
+    var answerPart = getAnswerPart()
+    const row = answerPart.length
+    var hintNum = swapArray(getHintNum(row), row1, row2)
+    setHint(hintChar, hintNum, row)
+    setAnswer(answerChar, answerPart)
+}
+
+function exchangeColumn(column1, column2) {
+    var answerPart = swapArray(getAnswerPart(), column1, column2)
     const row = answerPart.length
     var hintNum = getHintNum(row)
     var newHintNum = []
     hintNum.forEach(hintNumLine => {
-        newHintNum.push(swapArray(hintNumLine, row1, row2))
+        newHintNum.push(swapArray(hintNumLine, column1, column2))
     });
     setHint(getHintChar(), newHintNum, row)
     setAnswer(getAnswerChar(), answerPart)
-}
-
-function exchangeColumn(column1, column2) {
-    var hintChar = swapArray(getHintChar(), column1, column2)
-    var answerChar = swapArray(getAnswerChar(), column1, column2)
-    var answerPart = getAnswerPart()
-    const row = answerPart.length
-    var hintNum = swapArray(getHintNum(row), column1, column2)
-    setHint(hintChar, hintNum, row)
-    setAnswer(answerChar, answerPart)
 }
 
 function swapArray(array, pos1, pos2) {

@@ -87,12 +87,6 @@ function setAnswer(answerChar, answerPart) {
     setWritten("answerChar", answerChar)
     setWritten("answerPart", answerPart)
 }
-function setAnswerCheck() {
-    var elements = document.getElementsByClassName("answerCheck")
-    for(const element of elements) {
-        element.classList.remove("hidden")
-    }
-}
 
 async function hashAnswer(answerChar, answerPart) {
     const messageString = answerChar.join("") + answerPart.join("")

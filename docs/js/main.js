@@ -38,6 +38,11 @@ function changeSise() {
 
 function showProblem() {
     var params = new URLSearchParams(document.location.search);
+    if (!params.has("m") || params.get("m") === "edit") {
+        setMode("edit")
+    } else {
+        setMode("solve")
+    }
     if (!params.has("r") || !params.has("c")) {
         makeNewBoard(8, 9);
         return
@@ -56,6 +61,24 @@ function showProblem() {
     }
 }
 showProblem();
+
+function setMode(mode) {
+    const hiddenClass = (mode === "edit") ? "displaySolveMode" : "displayEditMode"
+    var elements = document.getElementsByClassName(hiddenClass);
+    for (const element of elements) {
+        element.classList.add("hidden")
+    }
+    if (mode === "edit") {
+        document.getElementById("URLErea").setAttribute("open", "")
+    }
+}
+
+function setAnswerCheck() {
+    var elements = document.getElementsByClassName("answerCheck")
+    for(const element of elements) {
+        element.classList.remove("hidden")
+    }
+}
 
 async function showUrl(mode) {
     var params = new URLSearchParams();

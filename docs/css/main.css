@@ -2,12 +2,6 @@ body {
     text-align: center;
 }
 
-.inputSize {
-    width: 1em;
-    text-align: right;
-    appearance: textfield;
-}
-
 button {
     padding: 4px;
     border-radius: 0.5em;
@@ -38,8 +32,39 @@ th, td {
     font-weight: normal;
 }
 
-prompt {
-    width: 10em;
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: end;
+}
+
+.settingErea {
+    background-color: whitesmoke;
+    padding-bottom: 0.1em;
+}
+
+.settingLabel {
+    color: darkblue;
+    font-size: large;
+}
+
+.inputNumber {
+    width: 1em;
+    text-align: right;
+    appearance: textfield;
+}
+
+#URLLine {
+    width: 30em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .leftProblem {
