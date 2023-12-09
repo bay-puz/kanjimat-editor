@@ -8,43 +8,72 @@
     <body>
         <head>
             <h1>漢字部品マット</h1>
-            <dev class="displayEditMode"><h2>編集モード</h2></dev>
-            <dev class="displaySolveMode"><h2>解答モード</h2></dev>
         </head>
-        <div>
+        <div class="settingErea">
+            <h2 class="displayEditMode">編集モード</h2>
+            <h2 class="displaySolveMode">解答モード</h2>
             <p id="settingSize" class="displayEditMode">
+                <span class="settingLabel">サイズ</span>
                 <label for="setRow">ヨコ</label>
-                <input type="number" id="setRow" min="1" class="inputSize" value="8">
+                <input type="number" id="setRow" min="1" class="inputNumber" value="8">
                 <label for="setColumn">タテ</label>
-                <input type="number" id="setColumn" min="1" class="inputSize" value="9">
-                <button id="setSize">サイズ変更</button>
+                <input type="number" id="setColumn" min="1" class="inputNumber" value="9">
+                <button id="setSize">変更</button>
             </p>
             <p id="settingUrl">
-                URL出力 
-                <button id="showEditUrl">編集</button>
-                <button id="showSolveUrl">解答</button>
-                <button id="showSolveCheckUrl" class="hidden">解答（正解判定付き）</button>
+                <details id="URLErea">
+                    <summary class="settingLabel">
+                        URL出力
+                    </summary>
+                    <p>
+                        <button id="showEditUrl">編集</button>
+                        <button id="showSolveUrl">解答</button>
+                        <button id="showSolveCheckUrl">正解判定付き</button>
+                    </p>
+                    <p id="URLLine" class="hidden"><a href id="showURL" target="_blank"></a></p>
+                </details>
             </p>
-            <p id="settingCharacter">
-                <label for="inputChar">文字</label>
-                <input type="text" id="inputChar">
-                <dev id="settingInput" class="displayEditMode">
-                    （
-                    <label for="problemInput">問題</label>
-                    <input type="radio" id="problemInput" name="inputMode" value="problem">
-                    ／
-                    <label for="answerInput">解答</label>
-                    <input type="radio" id="answerInput" name="inputMode" value="answer" checked>
-                    ）
-                </dev>
+            <p id="settingLine">
+                <details id="exchangeLine" class="displayEditMode">
+                    <summary class="settingLabel">
+                        行・列を入れ替える
+                    </summary>
+                    <p>
+                        <label for="exchangeRow">行</label>
+                        <input type="radio" id="exchangeRow" name="exchangeMode" value="row" checked>
+                        ／
+                        <label for="exchangeColumn">列</label>
+                        <input type="radio" id="exchangeColumn" name="exchangeMode" value="column">
+                    </p>
+                    <p>
+                        <input type="number" id="exchange1" min="1" class="inputNumber" value="1">
+                        <input type="number" id="exchange2" min="1" class="inputNumber" value="1">
+                        <button id="exchangeButton">入れ替える</button>
+                    </p>
+                </details>
+            </p>
+            <p id="settingInput" class="displayEditMode">
+                <span class="settingLabel">入力モード</span>
+                <label for="problemInput">問題</label>
+                <input type="radio" id="problemInput" name="inputMode" value="problem" checked>
+                ／
+                <label for="answerInput">解答</label>
+                <input type="radio" id="answerInput" name="inputMode" value="answer">
             </p>
         </div>
         <p id="board">
             <table rules="all" id="table">
             </table>
         </p>
+        <p id="answerCheckErea" class="answerCheck hidden">
+            <button id="checkAnswer">チェック</button>
+        </p>
         <script type="text/javascript" src="./js/table.js"></script>
-        <script type="text/javascript" src="./js/mode.js"></script>
+        <script type="text/javascript" src="./js/data.js"></script>
+        <script type="text/javascript" src="./js/exchange.js"></script>
         <script type="text/javascript" src="./js/main.js"></script>
     </body>
+    <footer>
+        by <a href="https://github.com/bay-puz/kanjimat-editor" target="_blank">bay</a>
+    </footer>
 </html>

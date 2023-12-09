@@ -2,16 +2,6 @@ body {
     text-align: center;
 }
 
-#inputChar {
-    width: 3em;
-}
-
-.inputSize {
-    width: 1em;
-    text-align: right;
-    -moz-appearance: textfield;
-}
-
 button {
     padding: 4px;
     border-radius: 0.5em;
@@ -42,11 +32,46 @@ th, td {
     font-weight: normal;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    text-align: end;
+}
+
+.settingErea {
+    background-color: whitesmoke;
+    padding-bottom: 0.1em;
+}
+
+.settingLabel {
+    color: darkblue;
+    font-size: large;
+}
+
+.inputNumber {
+    width: 1em;
+    text-align: right;
+    appearance: textfield;
+}
+
+#URLLine {
+    width: 30em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .leftProblem {
     text-align: left;
     padding-left: 5%;
     border-right: none;
-    width: 5em;
+    width: 6em;
 }
 
 .leftAnswer {
@@ -63,6 +88,10 @@ th, td {
 
 .problemNumber {
     color: black;
+}
+
+.answerPart {
+    color: green;
 }
 
 .answerChar {
