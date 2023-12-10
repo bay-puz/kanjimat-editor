@@ -1,5 +1,5 @@
 document.getElementById("table").addEventListener("click", clickBoard);
-document.getElementById("table").oncontextmenu = function() {rightClickTable(event); return false};
+document.getElementById("table").oncontextmenu = function() {clickBoard(event, true); return false};
 document.getElementById("setSize").addEventListener("click", changeSise);
 document.getElementById("showEditUrl").addEventListener("click", function(){showUrl("edit")} );
 document.getElementById("showSolveUrl").addEventListener("click", function(){showUrl("solve")} );
@@ -119,59 +119,41 @@ function getTableColumn() {
     return parseInt(document.getElementById("setColumn").value);
 }
 
-function clickBoard(event) {
+function clickBoard(event, rightClick = false) {
     var element = document.elementFromPoint(event.pageX, event.pageY);
+    var types = []
     if (isProblemMode()) {
-        clickProblem(element)
+        types = rightClick ? ["hintNumber"] : ["hintChar", "hintNumber"]
     } else {
-        clickAnswer(element)
+        if (rightClick) {
+            return
+        }
+        types = ["answerChar", "answerPart"]
+    }
+    for(const type of types) {
+        if (element.classList.contains(type)) {
+            writeCell(element, type, rightClick);
+            return;
+        }
+        var cellElements = element.getElementsByClassName(type);
+        if (cellElements.length > 0) {
+            writeCell(cellElements[0], type, rightClick);
+            return;
+        }
     }
 }
 
-function clickProblem(element) {
-    if (element.classList.contains("problemNumber")) {
-        upProblemNumber(element);
-        return;
-    }
-    if (element.classList.contains("problemChar")) {
-        writeChar(element);
-        return;
-    }
-    var cellElements = element.getElementsByClassName("problemNumber");
-    if (cellElements.length > 0) {
-        upProblemNumber(cellElements[0]);
-        return;
-    }
-    var cellElements = element.getElementsByClassName("problemChar");
-    if (cellElements.length > 0) {
-        writeChar(cellElements[0]);
-        return;
-    }
-}
-
-function clickAnswer(element) {
-    if (element.classList.contains("answerChar") || element.classList.contains("answerPart")) {
-        writeChar(element);
-        return;
-    }
-    var cellElements = element.getElementsByClassName("answerChar");
-    if (cellElements.length > 0) {
-        writeChar(cellElements[0]);
-        return;
-    }
-    var cellElements = element.getElementsByClassName("answerPart");
-    if (cellElements.length > 0) {
-        writeChar(cellElements[0]);
-        return;
-    }
-}
-
-function writeChar(element) {
-    var char = prompt()
-    if (char === null) {
+function writeCell(element, type, rightClick) {
+    if (type === "hintNumber") {
+        if (rightClick) {
+            downHintNumber(element)
+        } else {
+            upHintNumber(element)
+        }
         return
     }
-    element.innerText = char;
+    var input = prompt()
+    writeChar(input, element, type)
 }
 
 function isProblemMode() {

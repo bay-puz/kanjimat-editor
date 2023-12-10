@@ -24,7 +24,7 @@ function createRowHtml(num, row) {
 
     var thElement = document.createElement("th");
     thElement.classList.add("leftProblem");
-    thElement.append(createProblemCharHtml());
+    thElement.append(createHintCharHtml());
     trElement.append(thElement);
 
     thElement = document.createElement("th");
@@ -34,7 +34,7 @@ function createRowHtml(num, row) {
 
     for (let index = 0; index < row; index++) {
         var tdElement = document.createElement("td");
-        tdElement.append(createProblemNumberHtml());
+        tdElement.append(createHintNumberHtml());
         trElement.append(tdElement);
     }
     return trElement;
@@ -52,49 +52,14 @@ function createAnswerPartHtml() {
     return element;
 }
 
-function createProblemCharHtml() {
+function createHintCharHtml() {
     var element = document.createElement("span");
-    element.classList.add("problemChar", "char");
+    element.classList.add("hintChar", "char");
     return element;
 }
 
-function createProblemNumberHtml() {
+function createHintNumberHtml() {
     var element = document.createElement("span");
-    element.classList.add("problemNumber");
+    element.classList.add("hintNumber");
     return element;
-}
-
-function upProblemNumber(element) {
-    if (! isProblemMode()) {
-        return;
-    }
-    var number = parseInt(element.innerText);
-    if (number) {
-        element.innerText = number + 1;
-    } else {
-        element.innerText = 1;
-    }
-}
-
-function rightClickTable(event) {
-    var element = document.elementFromPoint(event.pageX, event.pageY);
-    if (element.classList.contains("problemNumber")) {
-        downProblemNumber(element);
-        return;
-    }
-    var cellElements = element.getElementsByClassName("problemNumber");
-    for (const cellElement of cellElements) {
-        downProblemNumber(cellElement);
-        return;
-    }
-}
-
-function downProblemNumber(element) {
-    if (! isProblemMode()) {
-        return;
-    }
-    var number = parseInt(element.innerText);
-    if (number) {
-        element.innerText = number > 1 ? number - 1: "";
-    }
 }

@@ -9,6 +9,67 @@ function stringToArray(string) {
     return string.split(DELIMETER)
 }
 
+function writeChar(input, element, type) {
+    const char = validate(input, type)
+    if (char === null) {
+        return
+    }
+    element.innerText = char
+}
+
+function validate(input, type) {
+    if (input.length === 0) {
+        return ""
+    }
+    if (type === "hintChar") {
+        return kanaString(input)
+    }
+    if (type === "answerChar") {
+        return input.at(0)
+    }
+    if (type === "answerPart") {
+        return input.substring(0, 4)
+    }
+    return null
+}
+
+function kanaString(string) {
+    var kana = ""
+    for (let index = 0; index < string.length; index++) {
+        const code =string.codePointAt(index)
+        if (string.at(index) == "ー") {
+            kana += string.at(index)
+        }else if ("ぁ".codePointAt(0) <= code && code <= "ゖ".codePointAt(0)) {
+            kana += string.at(index)
+        } else if("ァ".codePointAt(0) <= code && code <= "ヶ".codePointAt(0)) {
+            kana += string.at(index)
+        }
+    }
+    return kana
+}
+
+function upHintNumber(element) {
+    if (! isProblemMode()) {
+        return;
+    }
+    var number = parseInt(element.innerText);
+    if (number) {
+        element.innerText = number + 1;
+    } else {
+        element.innerText = 1;
+    }
+}
+
+function downHintNumber(element) {
+    if (! isProblemMode()) {
+        return;
+    }
+    var number = parseInt(element.innerText);
+    if (number) {
+        element.innerText = number > 1 ? number - 1: "";
+    }
+}
+
 function getWritten(className) {
     var array = []
     var elements = document.getElementsByClassName(className);
@@ -50,11 +111,11 @@ function setWritten2D(className, array2, row) {
 }
 
 function getHintChar() {
-    return getWritten("problemChar")
+    return getWritten("hintChar")
 }
 
 function getHintNum(row = 0) {
-    var array = getWritten("problemNumber")
+    var array = getWritten("hintNumber")
     if (row === 0) {
         return array
     }
@@ -67,11 +128,11 @@ function getHintNum(row = 0) {
 }
 
 function setHint(hintChar, hintNum, row = 0) {
-    setWritten("problemChar", hintChar)
+    setWritten("hintChar", hintChar)
     if(row === 0) {
-        setWritten("problemNumber", hintNum)
+        setWritten("hintNumber", hintNum)
     } else {
-        setWritten2D("problemNumber", hintNum, row)
+        setWritten2D("hintNumber", hintNum, row)
     }
 }
 
