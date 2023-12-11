@@ -5,7 +5,6 @@ document.getElementById("showEditUrl").addEventListener("click", function(){show
 document.getElementById("showSolveUrl").addEventListener("click", function(){showUrl("solve")} );
 document.getElementById("showSolveCheckUrl").addEventListener("click", function(){showUrl("solveCheck")} );
 document.getElementById("exchangeButton").addEventListener("click", exchangeLines);
-document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 
 function makeNewBoard(row, column) {
     document.getElementById("setRow").value = row;
@@ -78,6 +77,7 @@ function setAnswerCheck() {
     for(const element of elements) {
         element.classList.remove("hidden")
     }
+    document.getElementById("solveModeLine").classList.add("withCheck")
 }
 
 async function showUrl(mode) {
@@ -87,16 +87,21 @@ async function showUrl(mode) {
     } else {
         params.append("m", "edit")
     }
+    const answerChar = getAnswerChar()
+    const answerPart = getAnswerPart()
     params.append("r", getTableRow());
     params.append("c", getTableColumn());
     params.append("h", arrayToString(getHintChar()))
     params.append("i", arrayToString(getHintNum()))
     if (mode === "edit") {
-        params.append("j", arrayToString(getAnswerChar()))
-        params.append("k", arrayToString(getAnswerPart()))
+        params.append("j", arrayToString(answerChar))
+        params.append("k", arrayToString(answerPart))
     }
     if (mode === "solveCheck") {
-        const answerHash = await hashAnswer(getAnswerChar(), getAnswerPart())
+        if (answerChar.includes("") || answerPart.includes("")) {
+            sayInvalid()
+        }
+        const answerHash = await hashAnswer(answerChar, answerPart)
         params.append("a", answerHash)
     }
     const url = new URL(location.href)
@@ -154,6 +159,7 @@ function writeCell(element, type, rightClick) {
     }
     var input = prompt()
     writeChar(input, element, type)
+    checkAnswer()
 }
 
 function isProblemMode() {
@@ -190,8 +196,14 @@ async function checkAnswer() {
     const problemHash = params.get("a")
     const ansewrHash = await hashAnswer(getAnswerChar(), getAnswerPart())
     if(problemHash === ansewrHash) {
-        alert("正解です！")
-    } else {
-        alert("不正解")
+        setTimeout(sayCompeleted, 200)
     }
+}
+
+function sayCompeleted() {
+    alert("正解です！")
+}
+
+function sayInvalid() {
+    alert("解答が入っていないマスがあります")
 }

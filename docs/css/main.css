@@ -55,6 +55,10 @@ footer {
     font-size: large;
 }
 
+.withCheck {
+    background-color:lightblue;
+}
+
 .inputNumber {
     width: 1em;
     text-align: right;

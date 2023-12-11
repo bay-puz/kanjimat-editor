@@ -18,6 +18,9 @@ function writeChar(input, element, type) {
 }
 
 function validate(input, type) {
+    if (input === null) {
+        return null
+    }
     if (input.length === 0) {
         return ""
     }
@@ -156,9 +159,4 @@ async function hashAnswer(answerChar, answerPart) {
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     return hashHex;
-}
-
-async function compareHash(hash) {
-    const nowHash = await hashAnswer(getAnswerChar(), getAnswerPart())
-    return hash === nowHash
 }
