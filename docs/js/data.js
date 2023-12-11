@@ -157,8 +157,3 @@ async function hashAnswer(answerChar, answerPart) {
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     return hashHex;
 }
-
-async function compareHash(hash) {
-    const nowHash = await hashAnswer(getAnswerChar(), getAnswerPart())
-    return hash === nowHash
-}

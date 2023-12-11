@@ -5,7 +5,6 @@ document.getElementById("showEditUrl").addEventListener("click", function(){show
 document.getElementById("showSolveUrl").addEventListener("click", function(){showUrl("solve")} );
 document.getElementById("showSolveCheckUrl").addEventListener("click", function(){showUrl("solveCheck")} );
 document.getElementById("exchangeButton").addEventListener("click", exchangeLines);
-document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 
 function makeNewBoard(row, column) {
     document.getElementById("setRow").value = row;
@@ -78,6 +77,7 @@ function setAnswerCheck() {
     for(const element of elements) {
         element.classList.remove("hidden")
     }
+    document.getElementById("solveModeLine").classList.add("withCheck")
 }
 
 async function showUrl(mode) {
@@ -154,6 +154,7 @@ function writeCell(element, type, rightClick) {
     }
     var input = prompt()
     writeChar(input, element, type)
+    checkAnswer()
 }
 
 function isProblemMode() {
@@ -190,8 +191,10 @@ async function checkAnswer() {
     const problemHash = params.get("a")
     const ansewrHash = await hashAnswer(getAnswerChar(), getAnswerPart())
     if(problemHash === ansewrHash) {
-        alert("正解です！")
-    } else {
-        alert("不正解")
+        setTimeout(showMessage, 200)
     }
+}
+
+function showMessage() {
+    alert("正解です！")
 }
