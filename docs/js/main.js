@@ -87,16 +87,21 @@ async function showUrl(mode) {
     } else {
         params.append("m", "edit")
     }
+    const answerChar = getAnswerChar()
+    const answerPart = getAnswerPart()
     params.append("r", getTableRow());
     params.append("c", getTableColumn());
     params.append("h", arrayToString(getHintChar()))
     params.append("i", arrayToString(getHintNum()))
     if (mode === "edit") {
-        params.append("j", arrayToString(getAnswerChar()))
-        params.append("k", arrayToString(getAnswerPart()))
+        params.append("j", arrayToString(answerChar))
+        params.append("k", arrayToString(answerPart))
     }
     if (mode === "solveCheck") {
-        const answerHash = await hashAnswer(getAnswerChar(), getAnswerPart())
+        if (answerChar.includes("") || answerPart.includes("")) {
+            sayInvalid()
+        }
+        const answerHash = await hashAnswer(answerChar, answerPart)
         params.append("a", answerHash)
     }
     const url = new URL(location.href)
@@ -191,10 +196,14 @@ async function checkAnswer() {
     const problemHash = params.get("a")
     const ansewrHash = await hashAnswer(getAnswerChar(), getAnswerPart())
     if(problemHash === ansewrHash) {
-        setTimeout(showMessage, 200)
+        setTimeout(sayCompeleted, 200)
     }
 }
 
-function showMessage() {
+function sayCompeleted() {
     alert("正解です！")
+}
+
+function sayInvalid() {
+    alert("解答が入っていないマスがあります")
 }

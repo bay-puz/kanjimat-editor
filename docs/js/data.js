@@ -18,6 +18,9 @@ function writeChar(input, element, type) {
 }
 
 function validate(input, type) {
+    if (input === null) {
+        return null
+    }
     if (input.length === 0) {
         return ""
     }
